@@ -4,7 +4,8 @@
   "description": "CSS library for easy use of CSS flexbox, based on Angular Material Layout",
   "main": "null",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run-script node-sass src/flexlay.scss dist/flexlay.css"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/ShadowManu/flexlay/issues"
   },
-  "homepage": "https://github.com/ShadowManu/flexlay#readme"
+  "homepage": "https://github.com/ShadowManu/flexlay#readme",
+  "devDependencies": {
+    "node-sass": "^3.8.0"
+  }
 }

@@ -8,7 +8,7 @@ This project is still a proof of concept and has just started development. If yo
 
 At the moment ot this writing, not a single line of useful CSS (SASS) had been written, just setup the repo but my mind was just cycling on how to do this, the tooling, documentation and attract people. However, I think I can write a rough sketch of what I plan to do / what is needed to do.
 
-- [ ] Setup a node-sass buildchain (I'll use NPM because reasons)
+- [X] Setup a node-sass buildchain (I'll use NPM because reasons)
 - [ ] Initial styles based on Angular Material
 - [ ] Setup NPM deployment
 - [ ] Setup tests (what kind? Im not CSS Test Expert. At most, I know linting)
