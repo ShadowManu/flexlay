@@ -5,7 +5,7 @@
   "main": "null",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run-script node-sass src/flexlay.scss dist/flexlay.css"
+    "build": "npm run node-sass src/flexlay.scss dist/flexlay.css"
   },
   "repository": {
     "type": "git",
