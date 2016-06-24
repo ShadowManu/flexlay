@@ -1,0 +1,28 @@
+{
+  "name": "flexlay",
+  "version": "0.1.0",
+  "description": "CSS library for easy use of CSS flexbox, based on Angular Material Layout",
+  "main": "null",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShadowManu/flexlay.git"
+  },
+  "keywords": [
+    "css",
+    "flexbox",
+    "library",
+    "css3",
+    "layout",
+    "angular",
+    "material"
+  ],
+  "author": "Manuel Pacheco",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShadowManu/flexlay/issues"
+  },
+  "homepage": "https://github.com/ShadowManu/flexlay#readme"
+}
