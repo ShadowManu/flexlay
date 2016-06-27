@@ -7,6 +7,9 @@
 * $break: name of the breakpoint
 *
 */
+
+@import '../variables.scss';
+
 @mixin flex-properties($break: null) {
 
   $break-suffix: '';

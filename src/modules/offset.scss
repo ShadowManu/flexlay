@@ -8,6 +8,9 @@
 *
 * $break: name of the breakpoint
 */
+
+@import '../variables.scss';
+
 @mixin flex-offsets($break: null) {
   $break-suffix: '';
   @if $break != null { $break-suffix: '-#{$break}'; }

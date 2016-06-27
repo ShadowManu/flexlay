@@ -12,6 +12,9 @@
 * NOTE: one subtle difference against NG1 is that both properties must be defined i.e. only defining one axis can have
 * wrong effects. If this is desired to be changed, the selectors must be somehow modified to support this.
 */
+
+@import '../variables.scss';
+
 @mixin flex-alignments($break: null) {
 
   // TODO Missing check if defaults are start stretch

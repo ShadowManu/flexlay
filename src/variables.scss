@@ -4,10 +4,11 @@
 * Variables of shared use through the modules
 */
 
-$baseline-grid:         8px !default;
-$gutter-width:   ($baseline-grid * 2) !default;
+$lib-prefix:      'fl-';
+$baseline-grid:   8px !default;
+$gutter-width:    ($baseline-grid * 2) !default;
 
-$break-xs:  600px !default;
-$break-sm:  960px !default;
-$break-md:  1280px !default;
-$break-lg:  1920px !default;
+$break-xs:        600px !default;
+$break-sm:        960px !default;
+$break-md:        1280px !default;
+$break-lg:        1920px !default;
