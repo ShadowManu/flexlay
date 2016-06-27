@@ -14,7 +14,7 @@ $lib-prefix: 'fl-';
 /**
 * Flex Orders
 *
-* This mixin defines selectors for the CSS order property for flexible elements for a given breakpoint name
+* This mixin defines selectors for the order CSS property for flexible elements for a given breakpoint name
 * https://developer.mozilla.org/en-US/docs/Web/CSS/order
 *
 * $break: name of the breakpoint
@@ -38,7 +38,7 @@ $lib-prefix: 'fl-';
 /**
 * Flex Offsets
 *
-* This mixin defines selectors for offsets for flexible elements through the CSS margin property
+* This mixin defines selectors for offsets for flexible elements through the margin CSS property
 * https://developer.mozilla.org/en/docs/Web/CSS/margin
 *
 * TODO: add support for margin-top for column layouts
@@ -76,8 +76,11 @@ $lib-prefix: 'fl-';
 /**
 * Flex Alignment
 *
-* This mixin defines selectors for flexible child alignment through the CSS justify-content property
+* This mixin defines selectors for flexible child alignment through the CSS justify-content, align-items and
+* align-content CSS properties
 * https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+* https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+* https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
 *
 * $break: name of the breakpoint
 *
@@ -133,4 +136,30 @@ $lib-prefix: 'fl-';
       }
     }
   }
+}
+
+/**
+* Flex Layout
+*
+* This mixin defines selectors for flexible child alignment through the CSS justify-content property
+* https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+*
+* $break: name of the breakpoint
+*
+* NOTE: one subtle difference against NG1 is that both properties must be defined i.e. only defining one axis can have
+* wrong effects. If this is desired to be changed, the selectors must be somehow modified to support this.
+*/
+@mixin flex-layouts($break: null) {
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
+
+  $prop-name: '#{$lib-prefix}layout#{$break-suffix}';
+
+  [#{$prop-name}], [#{$prop-name}="row"], [#{$prop-name}="column"] {
+    box-sizing: border-box;
+    display: flex; // TODO Autoprefixer for vendor prefixes
+  }
+
+  [#{$prop-name}="row"] { flex-direction: row; }
+  [#{$prop-name}="column"] { flex-direction: column; }
 }
