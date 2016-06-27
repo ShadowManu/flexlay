@@ -6,12 +6,13 @@
 *
 * $break: name of the breakpoint
 */
-
 @import '../variables.scss';
 
 @mixin flex-orders($break: null) {
   $break-suffix: '';
-  @if $break != null { $break-suffix: '-#{$break}'; }
+  @if $break != null {
+    $break-suffix: '-#{$break}';
+  }
 
   $prop-name: '#{$lib-prefix}order#{$break-suffix}';
 

@@ -8,12 +8,13 @@
 *
 * $break: name of the breakpoint
 */
-
 @import '../variables.scss';
 
 @mixin flex-offsets($break: null) {
   $break-suffix: '';
-  @if $break != null { $break-suffix: '-#{$break}'; }
+  @if $break != null {
+    $break-suffix: '-#{$break}';
+  }
 
   $prop-name: '#{$lib-prefix}order#{$break-suffix}';
 
@@ -23,8 +24,11 @@
     $selector: '[#{$prop-name}="#{$i * 5}"]';
 
     #{$selector} {
-      @if $i != 0 { margin-left: #{$i * 5 + '%'}; }
-      @else { margin-left: 0 }
+      @if $i != 0 {
+        margin-left: #{$i * 5 + '%'};
+      } @else {
+        margin-left: 0
+      }
     }
   }
 

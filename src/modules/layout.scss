@@ -7,12 +7,13 @@
 * $break: name of the breakpoint
 *
 */
-
 @import '../variables.scss';
 
 @mixin flex-layouts($break: null) {
   $break-suffix: '';
-  @if $break != null { $break-suffix: '-#{$break}'; }
+  @if $break != null {
+    $break-suffix: '-#{$break}';
+  }
 
   $prop-name: '#{$lib-prefix}layout#{$break-suffix}';
 
@@ -21,6 +22,10 @@
     display: flex; // TODO Autoprefixer for vendor prefixes
   }
 
-  [#{$prop-name}="row"] { flex-direction: row; }
-  [#{$prop-name}="column"] { flex-direction: column; }
+  [#{$prop-name}="row"] {
+    flex-direction: row;
+  }
+  [#{$prop-name}="column"] {
+    flex-direction: column;
+  }
 }
