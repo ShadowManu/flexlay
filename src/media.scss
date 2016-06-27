@@ -13,6 +13,7 @@
 @import 'modules/layout.scss';
 @import 'modules/properties.scss';
 
+// Groups module mixins as a single layout mixin
 @mixin layout($break: null) {
   @include flex-orders($break);
   @include flex-offsets($break);
@@ -22,8 +23,25 @@
   @include flex-properties($break);
 }
 
+// Given a content block, limit it to a given media bounds
+@mixin bounded($min: null, $max: null) {
+  @if $min == null {
+    @media (max-width: $max - 1) { @content; }
+  }
+  @else if $max == null {
+    @media (min-width: $min) { @content; }
+  }
+  @else {
+    @media (min-width: $min) and (max-width: $max - 1) { @content; }
+  }
+}
+
+// Default rules
 @include layout();
 
+// Definition of layout buckets
+// If you need to change the buckets (either number or place), modify the variables and this map
+// and everything will automagically adjust. Thanks SCSS.
 $buckets: (
   xs: (max: $break-xs),
   sm: (min: $break-xs, max: $break-sm),
@@ -32,34 +50,14 @@ $buckets: (
   xl: (min: $break-lg),
 );
 
+
+// Generate the rules per each bucket
 @each $bucket in map-keys($buckets) {
 
   $min: map-get(map-get($buckets, $bucket), min);
   $max: map-get(map-get($buckets, $bucket), max);
 
-  @if $min == null {
-    @media (max-width: $max) {
-      div.#{$bucket} { color: yellow; }
-    }
-  }
-
-  @else if $max == null {
-    @media (min-width: $min) {
-      div.#{$bucket} { color: red;}
-    }
-  }
-
-  @else {
-    @media (min-width: $min) and (max-width: $max) {
-      div.#{$bucket} { color: blue; }
-    }
-  }
-
-  // Also the greater than media queries
-  @if $max != null {
-    @media (min-width: $max) {
-      div.gt-#{$bucket} { color: purple; }
-    }
-  }
+  @include bounded($min, $max) { @include layout(#{$bucket}) };
+  @if $max != null { @include bounded($max) { @include layout(gt-#{$bucket}) }; }
 
 }
