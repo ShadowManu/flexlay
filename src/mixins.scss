@@ -14,22 +14,19 @@ $lib-prefix: 'fl-';
 /**
 * Flex Orders
 *
-* This mixin defines selectors for the CSS order property for flexible elements
-* for a given breakpoint name
-*
+* This mixin defines selectors for the CSS order property for flexible elements for a given breakpoint name
 * https://developer.mozilla.org/en-US/docs/Web/CSS/order
 *
 * $break: name of the breakpoint
 */
 @mixin flex-orders($break: null) {
-  $break-prefix: '';
-  @if $break == null { $break-prefix : ''; }
-  @else { $break-prefix: '-#{$break}'; }
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
 
-  // TODO CHANGE 3 TO 20
-  @for $i from -3 through 3 {
+  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
 
-    $prop-name: '#{$lib-prefix}order#{$break-prefix}';
+  @for $i from -20 through 20 {
+
     $selector: '[#{$prop-name}="#{$i}"]';
 
     #{$selector} {
@@ -38,3 +35,40 @@ $lib-prefix: 'fl-';
   }
 }
 
+/**
+* Flex Offsets
+*
+* This mixin defines selectors for offsets for flexible elements through the CSS margin property
+* https://developer.mozilla.org/en/docs/Web/CSS/margin
+*
+* TODO: add support for margin-top for column layouts
+*
+* $break: name of the breakpoint
+*/
+@mixin flex-offsets($break: null) {
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
+
+  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
+
+  // Margins in increments of 5
+  @for $i from 0 through 19 {
+
+    $selector: '[#{$prop-name}="#{$i * 5}"]';
+
+    #{$selector} {
+      @if $i != 0 { margin-left: #{$i * 5 + '%'}; }
+      @else { margin-left: 0 }
+    }
+  }
+
+  // Margins for 33 and 66
+  @each $i in 1, 2 {
+
+    $selector: '[#{$prop-name}="#{$i * 33}"]';
+
+    #{$selector} {
+      margin-left: calc(#{$i * 100 + '%'} / 3)
+    }
+  }
+}
