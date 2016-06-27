@@ -141,13 +141,11 @@ $lib-prefix: 'fl-';
 /**
 * Flex Layout
 *
-* This mixin defines selectors for flexible child alignment through the CSS justify-content property
-* https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+* This mixin defines selectors for flexible parents through the CSS flex-direction property
+* https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
 *
 * $break: name of the breakpoint
 *
-* NOTE: one subtle difference against NG1 is that both properties must be defined i.e. only defining one axis can have
-* wrong effects. If this is desired to be changed, the selectors must be somehow modified to support this.
 */
 @mixin flex-layouts($break: null) {
   $break-suffix: '';
@@ -163,3 +161,5 @@ $lib-prefix: 'fl-';
   [#{$prop-name}="row"] { flex-direction: row; }
   [#{$prop-name}="column"] { flex-direction: column; }
 }
+
+
