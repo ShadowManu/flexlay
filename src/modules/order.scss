@@ -1,0 +1,23 @@
+/**
+* Flex Order
+*
+* This mixin defines selectors for the order CSS property for flexible elements for a given breakpoint name
+* https://developer.mozilla.org/en-US/docs/Web/CSS/order
+*
+* $break: name of the breakpoint
+*/
+@mixin flex-orders($break: null) {
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
+
+  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
+
+  @for $i from -20 through 20 {
+
+    $selector: '[#{$prop-name}="#{$i}"]';
+
+    #{$selector} {
+      order: #{$i};
+    }
+  }
+}

@@ -11,29 +11,6 @@
 
 $lib-prefix: 'fl-';
 
-/**
-* Flex Orders
-*
-* This mixin defines selectors for the order CSS property for flexible elements for a given breakpoint name
-* https://developer.mozilla.org/en-US/docs/Web/CSS/order
-*
-* $break: name of the breakpoint
-*/
-@mixin flex-orders($break: null) {
-  $break-suffix: '';
-  @if $break != null { $break-suffix: '-#{$break}'; }
-
-  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
-
-  @for $i from -20 through 20 {
-
-    $selector: '[#{$prop-name}="#{$i}"]';
-
-    #{$selector} {
-      order: #{$i};
-    }
-  }
-}
 
 /**
 * Flex Offsets
@@ -162,4 +139,66 @@ $lib-prefix: 'fl-';
   [#{$prop-name}="column"] { flex-direction: column; }
 }
 
+/**
+* Flex Properties
+*
+* This mixin defines selectors for flexible parents through the CSS flex-direction property
+* https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+*
+* $break: name of the breakpoint
+*
+*/
+@mixin flex-properties($break: null) {
 
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
+
+  $prop-name: '#{$lib-prefix}flex#{$break-suffix}';
+  $layout-name: '#{$lib-prefix}layout#{$break-suffix}';
+
+  [#{$prop-name}]           { flex: 1;         box-sizing: border-box; }  // === flex: 1 1 0%;
+
+  [#{$prop-name}-grow]      { flex: 1 1 100%;  box-sizing: border-box; }
+  [#{$prop-name}-initial]   { flex: 0 1 auto;  box-sizing: border-box; }
+  [#{$prop-name}-auto]      { flex: 1 1 auto;  box-sizing: border-box; }
+  [#{$prop-name}-none]      { flex: 0 0 auto;  box-sizing: border-box; }
+  [#{$prop-name}-noshrink]  { flex: 1 0 auto;  box-sizing: border-box; }
+  [#{$prop-name}-nogrow]    { flex: 0 1 auto;  box-sizing: border-box; }
+
+  // Flex with percentages (in increments of 5)
+  @for $i from 0 through 20 {
+    $value : #{$i * 5 + '%'};
+
+    // Default
+    [#{$prop-name}="#{$i * 5}"] {
+      flex: 1 1 #{$value};
+      max-width: #{$value};
+      max-height: 100%;
+      box-sizing: border-box;
+    }
+
+    // Row Layouts
+    [fl-layout="row"] > [#{$prop-name}="#{$i * 5}"],
+    [#{$layout-name}="row"] > [#{$prop-name}="#{$i * 5}"] {
+      flex: 1 1 #{$value};
+      max-width: #{$value};
+      max-height: 100%;
+      box-sizing: border-box;
+    }
+
+    // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
+    @if $i == 0 {  min-width: 0;  }
+
+    // Row Layouts
+    [fl-layout="column"] > [#{$prop-name}="#{$i * 5}"],
+    [#{$layout-name}="column"] > [#{$prop-name}="#{$i * 5}"] {
+      flex: 1 1 #{$value};
+      max-width: 100%;
+      max-height: #{$value};
+      box-sizing: border-box;
+    }
+
+    // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
+    @if $i == 0 {  min-height: 0;  }
+  }
+}
