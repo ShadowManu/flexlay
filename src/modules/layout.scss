@@ -1,0 +1,23 @@
+/**
+* Flex Layout
+*
+* This mixin defines selectors for flexible parents through the CSS flex-direction property
+* https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+*
+* $break: name of the breakpoint
+*
+*/
+@mixin flex-layouts($break: null) {
+  $break-suffix: '';
+  @if $break != null { $break-suffix: '-#{$break}'; }
+
+  $prop-name: '#{$lib-prefix}layout#{$break-suffix}';
+
+  [#{$prop-name}], [#{$prop-name}="row"], [#{$prop-name}="column"] {
+    box-sizing: border-box;
+    display: flex; // TODO Autoprefixer for vendor prefixes
+  }
+
+  [#{$prop-name}="row"] { flex-direction: row; }
+  [#{$prop-name}="column"] { flex-direction: column; }
+}
