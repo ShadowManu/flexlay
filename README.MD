@@ -1,15 +1,47 @@
 # Flexlay
 
-Flexlay is a CSS-only library aiming to build on the concepts initially defined on Angular Material 1 on how to model a layout using CSS flexbox, being both capable of standalone use apart from Angular, or as a CSS core foundation for a Angular 2 Module.
+Flexlay is a CSS-only library aiming to build on the concepts initially defined on Angular Material 1 on how to model
+a layout using CSS flexbox, being both capable of standalone use apart from Angular, or as a CSS core foundation for
+a Angular 2 Module.
 
-This project is still a proof of concept and has just started development. If you're horribly missing Material Layout on Angular2, want a CSS-flexbox library more comprehensive than flexboxgrid, just wants to contribute to open source but are scared of huge projects with so many files, I am really open for you to help out on this project. Help me make the best out of this idea.
+This project is still a proof of concept and has just started development. If you're horribly missing Material Layout
+on Angular2, want a CSS-flexbox library more comprehensive than flexboxgrid, just wants to contribute to open source
+but are scared of huge projects with so many files, I am really open for you to help out on this project. Help me
+make the best out of this idea.
+
+## Project Status
+
+The initial workload of copying/translating/improving the layout system sources fron Angular Material 1 has been
+done, at least to a rough 85%. The `npm` deployment is the next step in the process so it can be publicly available
+to all brave users who would like to go on a wonderful flexbox journey. Check the roadmap to see what's going on.
+
+## Documentation
+*Nice, you've charmed me with your sweet words, but how the hell do I use this?*
+
+I'm sorry, documentation is lower in the roadmap. However, be safe that there a really great kind of mirror
+documentation that works perfect: [The Angular Material 1 Layout System](https://material.angularjs.org/1.0.5/layout/introduction).
+I religiously follow all rules there, with the usage being the same, except for a couple of caveats simple to follow:
+
+1. All attributes possess a `fl-` prefix to avoid naming collisions. For example, instead of using `flex-sm="33"`, you
+must use `fl-flex-sm="33"`.
+2. When using `layout-align` you must set both axis e.g. `layout-align="end stretch"`. Using only one will have
+unexpected results.`
+
+## What is implemented
+* Parent properties: `layout`, `layout-align`
+* Child properties: `flex`, `flex-order`, `flex-offset`
+* All implemented accepting breakpoint modifiers
+
+## What is missing (IRRC)
+* Parent properties: `layout-wrap`, `layout-padding`, `layout-margin`, `layout-fill`
+* Show/Hide properties: `show`, `hide`
 
 ## Roadmap
 
-At the moment ot this writing, not a single line of useful CSS (SASS) had been written, just setup the repo but my mind was just cycling on how to do this, the tooling, documentation and attract people. However, I think I can write a rough sketch of what I plan to do / what is needed to do.
+This is the original sketch (and its status) of the steps planned at the startup of the project.
 
 - [X] Setup a node-sass buildchain (I'll use NPM because reasons)
-- [ ] Initial styles based on Angular Material
+- [X] Initial styles based on Angular Material
 - [ ] Setup NPM deployment
 - [ ] Setup tests (what kind? Im not CSS Test Expert. At most, I know linting)
 - [ ] Setup documentation (readme.md style? gh-pages style? what can make this easier?)
