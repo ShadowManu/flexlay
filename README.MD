@@ -9,11 +9,18 @@ on Angular2, want a CSS-flexbox library more comprehensive than flexboxgrid, jus
 but are scared of huge projects with so many files, I am really open for you to help out on this project. Help me
 make the best out of this idea.
 
+## Usage
+
+After doing an `npm install flexlay`, you can do `<link rel="stylesheet" href="./node_modules/flexlay/dist/flexlay.css"`
+in your HTML.
+
 ## Project Status
 
 The initial workload of copying/translating/improving the layout system sources fron Angular Material 1 has been
-done, at least to a rough 85%. The `npm` deployment is the next step in the process so it can be publicly available
-to all brave users who would like to go on a wonderful flexbox journey. Check the roadmap to see what's going on.
+done, at least to a rough 85%. The `npm` deployment has been recently set up and released version `0.2.1`. It's then
+publicly available to all brave users who would like to go on a wonderful flexbox journey. Check the roadmap to see
+what's going on. Changes are stable enough to be used in one of my projects and feature completion will be based on
+personal requirements and community initiative.
 
 ## Documentation
 *Nice, you've charmed me with your sweet words, but how the hell do I use this?*
@@ -42,7 +49,7 @@ This is the original sketch (and its status) of the steps planned at the startup
 
 - [X] Setup a node-sass buildchain (I'll use NPM because reasons)
 - [X] Initial styles based on Angular Material
-- [ ] Setup NPM deployment
+- [X] Setup NPM deployment
 - [ ] Setup tests (what kind? Im not CSS Test Expert. At most, I know linting)
 - [ ] Setup documentation (readme.md style? gh-pages style? what can make this easier?)
 - [ ] Define serious conceptual documents for things missing, mental models that needs refinement, etc. Part of docs.
