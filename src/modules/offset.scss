@@ -16,7 +16,7 @@
     $break-suffix: '-#{$break}';
   }
 
-  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
+  $prop-name: '#{$lib-prefix}offset#{$break-suffix}';
 
   // Margins in increments of 5
   @for $i from 0 through 19 {
