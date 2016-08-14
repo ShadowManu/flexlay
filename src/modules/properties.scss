@@ -29,7 +29,8 @@
 
   // Flex with percentages (in increments of 5)
   @for $i from 0 through 20 {
-    $value : #{$i * 5 + '%'};
+    $value: #{$i * 5 + '%'};
+    @if ($i == 0) { $value: 0; }
 
     // Default
     [#{$prop-name}="#{$i * 5}"] {
@@ -46,10 +47,11 @@
       max-width: #{$value};
       max-height: 100%;
       box-sizing: border-box;
+
+      // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
+      @if $i == 0 {  min-width: 0;  }
     }
 
-    // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
-    @if $i == 0 {  min-width: 0;  }
 
     // Row Layouts
     [fl-layout="column"] > [#{$prop-name}="#{$i * 5}"],
@@ -58,9 +60,9 @@
       max-width: 100%;
       max-height: #{$value};
       box-sizing: border-box;
-    }
 
-    // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
-    @if $i == 0 {  min-height: 0;  }
+      // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
+      @if $i == 0 {  min-height: 0;  }
+    }
   }
 }
