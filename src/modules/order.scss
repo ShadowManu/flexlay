@@ -14,7 +14,7 @@
     $break-suffix: '-#{$break}';
   }
 
-  $prop-name: '#{$lib-prefix}order#{$break-suffix}';
+  $prop-name: '#{$lib-prefix}flex-order#{$break-suffix}';
 
   @for $i from -20 through 20 {
 
