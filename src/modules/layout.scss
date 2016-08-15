@@ -27,5 +27,11 @@
   }
   [#{$prop-name}="column"] {
     flex-direction: column;
+
+    /* IE10-IE11 column-flex bug fix (set proper default value) */
+    & > [#{$lib-prefix}flex] {
+      -ms-flex-basis: auto;
+      flex-basis: auto;
+    }
   }
 }
