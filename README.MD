@@ -35,12 +35,12 @@ must use `fl-flex-sm="33"`.
 unexpected results.`
 
 ## What is implemented
-* Parent properties: `layout`, `layout-align`, `layout-wrap`
+* Parent properties: `layout`, `layout-align`, `layout-wrap`, `layout-fill`
 * Child properties: `flex`, `flex-order`, `flex-offset`
 * All implemented accepting breakpoint modifiers
 
 ## What is missing (IRRC)
-* Parent properties: `layout-padding`, `layout-margin`, `layout-fill`
+* Parent properties: `layout-padding`, `layout-margin`
 * Show/Hide properties: `show`, `hide`
 
 ## Roadmap
