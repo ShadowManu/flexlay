@@ -49,11 +49,10 @@
       box-sizing: border-box;
 
       // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
-      @if $i == 0 {  min-width: 0;  }
+      @if $i == 0 { min-width: 0; }
     }
 
-
-    // Row Layouts
+    // Column Layouts
     [fl-layout="column"] > [#{$prop-name}="#{$i * 5}"],
     [#{$layout-name}="column"] > [#{$prop-name}="#{$i * 5}"] {
       flex: 1 1 #{$value};
