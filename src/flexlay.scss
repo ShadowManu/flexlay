@@ -2,5 +2,9 @@
 * This is the core file of the library. However, it just groups stuff existing in other files. Easy job.
 */
 
+// Media-Query-dependent modules
 @import 'media.scss';
+
+// Standalone, single modules
+@import 'modules/fill.scss';
 @import 'modules/wrap.scss';
