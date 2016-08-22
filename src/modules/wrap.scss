@@ -9,7 +9,7 @@
 @import '../variables.scss';
 
 @each $option in wrap, nowrap {
-  [layout-#{$option}] {
+  [#{$lib-prefix}layout-#{$option}] {
     flex-wrap: $option;
   }
 }
