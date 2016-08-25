@@ -4,7 +4,9 @@
 * This simple class allows a flex element to try and fill its parent in both axes
 */
 
-.layout-fill {
+@import '../variables.scss';
+
+[fl-layout-fill] {
   margin: 0;
   width: 100%;
   min-height: 100%;
