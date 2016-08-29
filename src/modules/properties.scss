@@ -64,4 +64,35 @@
       @if $i == 0 {  min-height: 0;  }
     }
   }
+
+  // Flex with thirds percentages (33 and 66)
+  @each $i in 33, 66 {
+    $value: #{$i  + '%'};
+
+    // Default
+    [#{$prop-name}="#{$i}"] {
+      flex: 1 1 #{$value};
+      max-width: #{$value};
+      max-height: 100%;
+      box-sizing: border-box;
+    }
+
+    // Row Layouts
+    [fl-layout="row"] > [#{$prop-name}="#{$i}"],
+    [#{$layout-name}="row"] > [#{$prop-name}="#{$i}"] {
+      flex: 1 1 #{$value};
+      max-width: #{$value};
+      max-height: 100%;
+      box-sizing: border-box;
+    }
+
+    // Column Layouts
+    [fl-layout="column"] > [#{$prop-name}="#{$i}"],
+    [#{$layout-name}="column"] > [#{$prop-name}="#{$i}"] {
+      flex: 1 1 #{$value};
+      max-width: 100%;
+      max-height: #{$value};
+      box-sizing: border-box;
+    }
+  }
 }
