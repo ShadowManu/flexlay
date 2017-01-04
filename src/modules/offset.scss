@@ -1,43 +1,24 @@
 /**
-* Flex Offset
+* Flexlay Offset
 *
-* This mixin defines selectors for offsets for flexible elements through the margin CSS property
 * https://developer.mozilla.org/en/docs/Web/CSS/margin
-*
-* TODO: add support for margin-top for column layouts
-*
-* $break: name of the breakpoint
 */
 @import '../variables.scss';
 
+/** Given a breakpoint name, generate offset (through margin) selectors */
 @mixin flex-offsets($break: null) {
-  $break-suffix: '';
-  @if $break != null {
-    $break-suffix: '-#{$break}';
-  }
+  $suffix: if($break, '-#{$break}', '');
+  $prop: '#{$lib-prefix}offset#{$suffix}';
+  $increment: 5;
 
-  $prop-name: '#{$lib-prefix}offset#{$break-suffix}';
-
-  // Margins in increments of 5
   @for $i from 0 through 19 {
-
-    $selector: '[#{$prop-name}="#{$i * 5}"]';
-
-    #{$selector} {
-      @if $i != 0 {
-        margin-left: #{$i * 5 + '%'};
-      } @else {
-        margin-left: 0
-      }
+    [#{$prop}="#{$i * $increment}"] {
+      margin-left: if($i != 0, #{$i * 5 + '%'}, 0);
     }
   }
 
-  // Margins for 33 and 66
-  @each $i in 1, 2 {
-
-    $selector: '[#{$prop-name}="#{$i * 33}"]';
-
-    #{$selector} {
+  @each $i in 33, 66 {
+    [#{$prop}="#{$i}"] {
       margin-left: calc(#{$i * 100 + '%'} / 3);
     }
   }
