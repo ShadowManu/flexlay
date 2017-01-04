@@ -8,7 +8,6 @@
 
 @import 'variables.scss';
 
-@import 'modules/offset.scss';
 @import 'modules/alignment.scss';
 
 @import 'modules/layout.scss';
@@ -16,9 +15,7 @@
 
 /** Given a breakpoint name (to be used as suffix), generate the CSS for flexlay modules **/
 @mixin layout($break: null) {
-  @include flex-offsets($break);
   @include flex-alignments($break);
-
   @include flex-layouts($break);
   @include flex-properties($break);
 }
