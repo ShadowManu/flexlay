@@ -4,11 +4,20 @@
 * Variables of shared use through the modules
 */
 
-$lib-prefix:      'fl-';
-$baseline-grid:   8px !default;
-$gutter-width:    ($baseline-grid * 2) !default;
+// Common variables
+$lib-prefix: 'fl-';
 
-$break-xs:        600px !default;
-$break-sm:        960px !default;
-$break-md:        1280px !default;
-$break-lg:        1920px !default;
+// Layout breakpoints
+$break-xs: 600px !default;
+$break-sm: 960px !default;
+$break-md: 1280px !default;
+$break-lg: 1920px !default;
+
+// Breakpoint boundaries
+$break-bounds: (
+  xs: (max: $break-xs),
+  sm: (min: $break-xs, max: $break-sm),
+  md: (min: $break-sm, max: $break-md),
+  lg: (min: $break-md, max: $break-lg),
+  xl: (min: $break-lg)
+);

@@ -1,8 +1,10 @@
 /**
-* Flex Media Queries
-*
-* This files uses the different modules and 'assigns' them to the media queries depending on Material Layout Breakpoints
-*/
+ * Flexlay Media Queries
+ *
+ * This files uses the different flexlay modules and 'assigns' them to the media queries
+ * depending on Material Layout Breakpoints
+ * https://material.io/guidelines/layout/responsive-ui.html
+ */
 
 @import 'variables.scss';
 
@@ -13,7 +15,7 @@
 @import 'modules/layout.scss';
 @import 'modules/properties.scss';
 
-// Groups module mixins as a single layout mixin
+/** Given a breakpoint name (to be used as suffix), generate the CSS for flexlay modules **/
 @mixin layout($break: null) {
   @include flex-orders($break);
   @include flex-offsets($break);
@@ -23,41 +25,27 @@
   @include flex-properties($break);
 }
 
-// Given a content block, limit it to a given media bounds
+/** Limits content to given breakpoint bounds **/
 @mixin bounded($min: null, $max: null) {
   @if $min == null {
     @media (max-width: $max - 1) { @content; }
-  }
-  @else if $max == null {
+
+  } @else if $max == null {
     @media (min-width: $min) { @content; }
-  }
-  @else {
+
+  } @else {
     @media (min-width: $min) and (max-width: $max - 1) { @content; }
   }
 }
 
-// Default rules
+// General rules
 @include layout();
 
-// Definition of layout buckets
-// If you need to change the buckets (either number or place), modify the variables and this map
-// and everything will automagically adjust. Thanks SCSS.
-$buckets: (
-  xs: (max: $break-xs),
-  sm: (min: $break-xs, max: $break-sm),
-  md: (min: $break-sm, max: $break-md),
-  lg: (min: $break-md, max: $break-lg),
-  xl: (min: $break-lg),
-);
+// Breakpoint rules
+@each $break, $bounds in $break-bounds {
+  $min: map-get($bounds, min);
+  $max: map-get($bounds, max);
 
-
-// Generate the rules per each bucket
-@each $bucket in map-keys($buckets) {
-
-  $min: map-get(map-get($buckets, $bucket), min);
-  $max: map-get(map-get($buckets, $bucket), max);
-
-  @include bounded($min, $max) { @include layout(#{$bucket}) };
-  @if $max != null { @include bounded($max) { @include layout(gt-#{$bucket}) }; }
-
+  @include bounded($min, $max) { @include layout($break) };
+  @if $max != null { @include bounded($max) { @include layout(gt-#{$break}) }; }
 }
