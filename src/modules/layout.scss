@@ -1,31 +1,25 @@
 /**
-* Flex Layout
+* Flexlay Parent Layout
 *
-* This mixin defines selectors for flexible parents through the CSS flex-direction property
 * https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-*
-* $break: name of the breakpoint
-*
 */
 @import '../variables.scss';
 
+/** Given a breakpoint name, generate parent layout selectors */
 @mixin flex-layouts($break: null) {
-  $break-suffix: '';
-  @if $break != null {
-    $break-suffix: '-#{$break}';
-  }
+  $suffix: if($break, '-#{$break}', '');
+  $prop: '#{$lib-prefix}layout#{$suffix}';
 
-  $prop-name: '#{$lib-prefix}layout#{$break-suffix}';
-
-  [#{$prop-name}], [#{$prop-name}="row"], [#{$prop-name}="column"] {
+  [#{$prop}], [#{$prop}="row"], [#{$prop}="column"] {
     box-sizing: border-box;
-    display: flex; // TODO Autoprefixer for vendor prefixes
+    display: flex;
   }
 
-  [#{$prop-name}="row"] {
+  [#{$prop}="row"] {
     flex-direction: row;
   }
-  [#{$prop-name}="column"] {
+
+  [#{$prop}="column"] {
     flex-direction: column;
 
     /* IE10-IE11 column-flex bug fix (set proper default value) */
