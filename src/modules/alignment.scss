@@ -1,32 +1,19 @@
 /**
-* Flex Alignment
-*
-* This mixin defines selectors for flexible child alignment through the CSS justify-content, align-items and
-* align-content CSS properties
-* https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
-* https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
-* https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
-*
-* $break: name of the breakpoint
-*
-* NOTE: one subtle difference against NG1 is that both properties must be defined i.e. only defining one axis can have
-* wrong effects. If this is desired to be changed, the selectors must be somehow modified to support this.
-*/
+ * Flex Child Alignment
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+ */
+
 @import '../variables.scss';
 
+/** Given a breakpoint name, generate alignment selectors */
 @mixin flex-alignments($break: null) {
+  $suffix: if($break, '-#{$break}', '');
+  $prop: '#{$lib-prefix}layout-align#{$suffix}';
 
-  // TODO Missing check if defaults are start stretch
+  // Main axis alignment
 
-  $break-suffix: '';
-  @if $break != null {
-    $break-suffix: '-#{$break}';
-  }
-
-  $prop-name: '#{$lib-prefix}layout-align#{$break-suffix}';
-
-  // Arrange on the Main Axis
-  // start, center, end, space-around, space-between
   $main: (
     start: flex-start,
     center: center,
@@ -35,16 +22,12 @@
     space-between: space-between
   );
 
-  @each $key in map-keys($main) {
-    $selector: '[#{$prop-name}^="#{$key} "]'; // The trailing space is on purpose
-
-    #{$selector} {
-      justify-content: map-get($main, $key);
-    }
+  @each $name, $value in $main {
+    [#{$prop}^="#{$name}"] { justify-content: $value; }
   }
 
-  // Arrange on the Cross Axis
-  // start, center, end, stretch
+  // Cross axis alignment
+
   $cross: (
     start: flex-start,
     center: center,
@@ -52,14 +35,12 @@
     stretch: stretch,
   );
 
-  @each $key in map-keys($cross) {
-    $selector: '[#{$prop-name}$=" #{$key}"]'; // The leading space is on purpose
+  @each $name, $value in $cross {
+    [#{$prop}$=" #{$name}"] {
+      align-items: $value;
+      align-content: $value;
 
-    #{$selector} {
-      align-items: map-get($cross, $key);
-      align-content: map-get($cross, $key);
-
-      @if ($key == center) { // IE overflow fix
+      @if ($name == center) { // IE overflow fix
         max-width: 100%;
         box-sizing: border-box;
       }
