@@ -7,7 +7,7 @@
 
 @import '../variables.scss';
 
-/** Given a breakpoint name, generate alignment selectors */
+/** Given a breakpoint name, generate alignment selectors applicable to parent elements */
 @mixin flex-alignments($break: null) {
   $suffix: if($break, '-#{$break}', '');
   $prop: '#{$lib-prefix}layout-align#{$suffix}';
