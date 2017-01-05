@@ -5,7 +5,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
  */
 
-@import '../variables.scss';
+@import '../variables';
 
 /** Given a breakpoint name, generate alignment selectors applicable to parent elements */
 @mixin flex-alignments($break: null) {
