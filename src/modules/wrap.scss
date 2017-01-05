@@ -1,12 +1,11 @@
 /**
-* Flex Wrap
+* Flexlay Wrap
 *
 * These simple classes allows to set/unset flex wrapping behavior through the CSS flex-wrap property.
 * https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-*
 */
 
-@import '../variables.scss';
+@import '../variables';
 
 @each $option in wrap, nowrap {
   [#{$lib-prefix}layout-#{$option}] {
