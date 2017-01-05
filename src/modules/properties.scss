@@ -1,97 +1,58 @@
 /**
-* Flex Properties
+* Flexlay Flex Property
 *
-* This mixin defines selectors for flexible parents through the CSS flex-direction property
-* https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-*
-* $break: name of the breakpoint
-*
+* https://developer.mozilla.org/en-US/docs/Web/CSS/flex
 */
 
-@import '../variables.scss';
+@import '../variables';
 
+/** Given a breakpoint name, generate selectors for CSS flex property */
 @mixin flex-properties($break: null) {
+  $suffix: if($break, '-#{$break}', '');
+  $prop: '#{$lib-prefix}flex#{$suffix}';
+  $layout: '#{$lib-prefix}layout#{$suffix}';
 
-  $break-suffix: '';
-  @if $break != null { $break-suffix: '-#{$break}'; }
+  [#{$prop}]           { flex: 1;         box-sizing: border-box; }  // === flex: 1 1 0%;
 
-  $prop-name: '#{$lib-prefix}flex#{$break-suffix}';
-  $layout-name: '#{$lib-prefix}layout#{$break-suffix}';
+  [#{$prop}-grow]      { flex: 1 1 100%;  box-sizing: border-box; }
+  [#{$prop}-initial]   { flex: 0 1 auto;  box-sizing: border-box; }
+  [#{$prop}-auto]      { flex: 1 1 auto;  box-sizing: border-box; }
+  [#{$prop}-none]      { flex: 0 0 auto;  box-sizing: border-box; }
+  [#{$prop}-noshrink]  { flex: 1 0 auto;  box-sizing: border-box; }
+  [#{$prop}-nogrow]    { flex: 0 1 auto;  box-sizing: border-box; }
 
-  [#{$prop-name}]           { flex: 1;         box-sizing: border-box; }  // === flex: 1 1 0%;
+  // Generate values
+  $values: ();
+  @for $i from 0 through 20 { $values: append($values, #{$i * 5}); }
+  $values: join($values, 33 66);
 
-  [#{$prop-name}-grow]      { flex: 1 1 100%;  box-sizing: border-box; }
-  [#{$prop-name}-initial]   { flex: 0 1 auto;  box-sizing: border-box; }
-  [#{$prop-name}-auto]      { flex: 1 1 auto;  box-sizing: border-box; }
-  [#{$prop-name}-none]      { flex: 0 0 auto;  box-sizing: border-box; }
-  [#{$prop-name}-noshrink]  { flex: 1 0 auto;  box-sizing: border-box; }
-  [#{$prop-name}-nogrow]    { flex: 0 1 auto;  box-sizing: border-box; }
-
-  // Flex with percentages (in increments of 5)
-  @for $i from 0 through 20 {
-    $value: #{$i * 5 + '%'};
-    @if ($i == 0) { $value: 0; }
+  // Generate rules
+  @each $val in $values {
+    $percent: if($val == 0, 0, #{$val + '%'});
 
     // Default
-    [#{$prop-name}="#{$i * 5}"] {
-      flex: 1 1 #{$value};
-      max-width: #{$value};
+    [#{$prop}="#{$val}"] {
+      flex: 1 1 #{$percent};
+      max-width: #{$percent};
       max-height: 100%;
       box-sizing: border-box;
     }
 
     // Row Layouts
-    [fl-layout="row"] > [#{$prop-name}="#{$i * 5}"],
-    [#{$layout-name}="row"] > [#{$prop-name}="#{$i * 5}"] {
-      flex: 1 1 #{$value};
-      max-width: #{$value};
-      max-height: 100%;
-      box-sizing: border-box;
-
-      // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
-      @if $i == 0 { min-width: 0; }
-    }
-
-    // Column Layouts
-    [fl-layout="column"] > [#{$prop-name}="#{$i * 5}"],
-    [#{$layout-name}="column"] > [#{$prop-name}="#{$i * 5}"] {
-      flex: 1 1 #{$value};
-      max-width: 100%;
-      max-height: #{$value};
-      box-sizing: border-box;
-
-      // Bug workaround for http://crbug.com/546034 - flex issues on Chrome 48
-      @if $i == 0 {  min-height: 0;  }
-    }
-  }
-
-  // Flex with thirds percentages (33 and 66)
-  @each $i in 33, 66 {
-    $value: #{$i  + '%'};
-
-    // Default
-    [#{$prop-name}="#{$i}"] {
-      flex: 1 1 #{$value};
-      max-width: #{$value};
-      max-height: 100%;
-      box-sizing: border-box;
-    }
-
-    // Row Layouts
-    [fl-layout="row"] > [#{$prop-name}="#{$i}"],
-    [#{$layout-name}="row"] > [#{$prop-name}="#{$i}"] {
-      flex: 1 1 #{$value};
-      max-width: #{$value};
+    [fl-layout="row"] > [#{$prop}="#{$val}"],
+    [#{$layout}="row"] > [#{$prop}="#{$val}"] {
+      flex: 1 1 #{$percent};
+      max-width: #{$percent};
       max-height: 100%;
       box-sizing: border-box;
     }
 
     // Column Layouts
-    [fl-layout="column"] > [#{$prop-name}="#{$i}"],
-    [#{$layout-name}="column"] > [#{$prop-name}="#{$i}"] {
-      flex: 1 1 #{$value};
+    [fl-layout="column"] > [#{$prop}="#{$val}"],
+    [#{$layout}="column"] > [#{$prop}="#{$val}"] {
+      flex: 1 1 #{$percent};
       max-width: 100%;
-      max-height: #{$value};
+      max-height: #{$percent};
       box-sizing: border-box;
     }
   }

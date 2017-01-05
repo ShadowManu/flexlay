@@ -6,12 +6,11 @@
  * https://material.io/guidelines/layout/responsive-ui.html
  */
 
-@import 'variables.scss';
+@import 'variables';
 
-@import 'modules/alignment.scss';
-
-@import 'modules/layout.scss';
-@import 'modules/properties.scss';
+@import 'modules/alignment';
+@import 'modules/layout';
+@import 'modules/properties';
 
 /** Given a breakpoint name (to be used as suffix), generate the CSS for flexlay modules **/
 @mixin layout($break: null) {
