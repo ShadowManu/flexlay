@@ -9,17 +9,18 @@
 /** Given a breakpoint name, generate selectors for CSS flex property */
 @mixin flex-properties($break: null) {
   $suffix: if($break, '-#{$break}', '');
+  $prop-nosuf:'#{$lib-prefix}flex';
   $prop: '#{$lib-prefix}flex#{$suffix}';
   $layout: '#{$lib-prefix}layout#{$suffix}';
 
   [#{$prop}]           { flex: 1;         box-sizing: border-box; }  // === flex: 1 1 0%;
 
-  [#{$prop}-grow]      { flex: 1 1 100%;  box-sizing: border-box; }
-  [#{$prop}-initial]   { flex: 0 1 auto;  box-sizing: border-box; }
-  [#{$prop}-auto]      { flex: 1 1 auto;  box-sizing: border-box; }
-  [#{$prop}-none]      { flex: 0 0 auto;  box-sizing: border-box; }
-  [#{$prop}-noshrink]  { flex: 1 0 auto;  box-sizing: border-box; }
-  [#{$prop}-nogrow]    { flex: 0 1 auto;  box-sizing: border-box; }
+  [#{$prop-nosuf}-grow#{$suffix}]      { flex: 1 1 100%;  box-sizing: border-box; }
+  [#{$prop-nosuf}-initial#{$suffix}]   { flex: 0 1 auto;  box-sizing: border-box; }
+  [#{$prop-nosuf}-auto#{$suffix}]      { flex: 1 1 auto;  box-sizing: border-box; }
+  [#{$prop-nosuf}-none#{$suffix}]      { flex: 0 0 auto;  box-sizing: border-box; }
+  [#{$prop-nosuf}-noshrink#{$suffix}]  { flex: 1 0 auto;  box-sizing: border-box; }
+  [#{$prop-nosuf}-nogrow#{$suffix}]    { flex: 0 1 auto;  box-sizing: border-box; }
 
   // Generate values
   $values: ();
