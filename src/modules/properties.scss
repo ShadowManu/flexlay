@@ -23,12 +23,12 @@
 
   // Generate values
   $values: ();
-  @for $i from 0 through 20 { $values: append($values, #{$i * 5}); }
+  @for $i from 0 through 20 { $values: append($values, $i * 5); }
   $values: join($values, 33 66);
 
   // Generate rules
   @each $val in $values {
-    $percent: if($val == 0, 0, #{$val + '%'});
+    $percent: if($val == 0, '0', '#{$val}%');
 
     // Default
     [#{$prop}="#{$val}"] {
