@@ -1,0 +1,44 @@
+/**
+ * Flexlay Visibility
+ *
+ * These classes allow to show or hide elements between layout breakpoints.
+ * Note: show is prioritized over hide.
+ */
+
+@import '../variables';
+
+@mixin flex-visibility($break: null) {
+  @if ($break != null and str-slice($break, 1, 2) != 'gt') {
+
+    // Generate list of all show suffixes that override the hide
+    $names: map-keys($break-bounds);
+    $index: index($names, $break);
+
+    $show-suffixes: ('');
+    @for $i from 1 through $index {
+      $suffix: nth($names, $i);
+      $show-suffixes: append($show-suffixes, if($i != $index, gt-#{$suffix}, $suffix));
+    }
+
+    // Generate show partial selector
+    $show-partial: '';
+    @each $show-suffix in $show-suffixes {
+      $dashed-suffix: if($show-suffix != '', '-#{$show-suffix}', '');
+      $selector: '[#{$lib-prefix}show#{$dashed-suffix}]';
+      $show-partial: '#{$show-partial}:not(#{$selector})';
+    }
+
+    // Generate list of all hide suffixes that should be generated
+    $hide-suffixes: ('');
+    @for $i from 1 through $index {
+      $suffix: nth($names, $i);
+      $hide-suffixes: append($show-suffixes, if($i != index, gt-#{$suffix}, $suffix))
+    }
+
+    // Generate rules
+    @each $hide-suffix in $hide-suffixes {
+      $dashed-suffix: if($hide-suffix != '', '-#{$hide-suffix}', '');
+      [#{$lib-prefix}hide#{$dashed-suffix}]#{$show-partial} { display: none; }
+    }
+  }
+}

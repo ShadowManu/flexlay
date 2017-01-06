@@ -11,12 +11,14 @@
 @import 'modules/alignment';
 @import 'modules/layout';
 @import 'modules/properties';
+@import 'modules/visibility';
 
 /** Given a breakpoint name (to be used as suffix), generate the CSS for flexlay modules **/
 @mixin layout($break: null) {
   @include flex-alignments($break);
   @include flex-layouts($break);
   @include flex-properties($break);
+  @include flex-visibility($break);
 }
 
 /** Limits content to given breakpoint bounds **/
@@ -31,6 +33,8 @@
     @media (min-width: $min) and (max-width: $max - 1) { @content; }
   }
 }
+
+// CODE GENERATION
 
 // General rules
 @include layout();
