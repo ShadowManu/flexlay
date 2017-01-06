@@ -31,6 +31,11 @@
   },
   "homepage": "https://github.com/ShadowManu/flexlay#readme",
   "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.0.0",
     "node-sass": "^3.8.0"
   }
 }
