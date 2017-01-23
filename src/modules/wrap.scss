@@ -7,8 +7,10 @@
 
 @import '../variables';
 
-@each $option in wrap, nowrap {
-  [#{$lib-prefix}layout-#{$option}] {
-    flex-wrap: $option;
+@mixin flex-wrap() {
+  @each $option in wrap, nowrap {
+    [#{$lib-prefix}layout-#{$option}] {
+      flex-wrap: $option;
+    }
   }
 }

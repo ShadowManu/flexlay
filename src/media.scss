@@ -33,17 +33,3 @@
     @media (min-width: $min) and (max-width: $max - 1) { @content; }
   }
 }
-
-// CODE GENERATION
-
-// General rules
-@include layout();
-
-// Breakpoint rules
-@each $break, $bounds in $break-bounds {
-  $min: map-get($bounds, min);
-  $max: map-get($bounds, max);
-
-  @include bounded($min, $max) { @include layout($break) };
-  @if $max != null { @include bounded($max) { @include layout(gt-#{$break}) }; }
-}

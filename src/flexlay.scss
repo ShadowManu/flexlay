@@ -1,10 +1,7 @@
 /*
-* This is the core file of the library. However, it just groups stuff existing in other files. Easy job.
+* This is the core file of the library. However, it just outputs stuff existing in other files as CSS.
 */
 
-// Media-Query-dependent modules
-@import 'media';
+@import 'mixins';
 
-// Standalone, single modules
-@import 'modules/fill';
-@import 'modules/wrap';
+@include flexlay();

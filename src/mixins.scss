@@ -1,0 +1,73 @@
+/**
+ * Flexlay Mixins
+ *
+ * These simple mixins are provided to be used inside SCSS files, 
+ * if for some reason, html selectors are not desired.
+ */
+
+@import './media';
+@import './modules/fill';
+@import './modules/wrap';
+
+/** Use this mixin to define a layout container and its direction */
+@mixin fl-layout($direction) {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: $direction;
+
+  /* IE10-IE11 column-flex bug fix (set proper default value) */
+  @if ($direction == 'column') {
+    -ms-flex-basis: auto;
+    flex-basis: auto;
+  }
+}
+
+/** Use this mixin to provide layout container alignment options */
+@mixin fl-layout-align($main, $cross) {
+  @if($main == null or $cros == null) {
+    @error 'You must provide both alignment arguments in fl-layout-align';
+  }
+
+  $main-map: (
+    start: flex-start,
+    center: center,
+    end: flex-end,
+    space-around: space-around,
+    space-between: space-between
+  );
+
+  $cross-map: (
+    start: flex-start,
+    center: center,
+    end: flex-end,
+    stretch: stretch,
+  );
+
+  justify-content: $map-get($main-map, $main);
+  align-items: $map-get($cross-map, $cross);
+  align-content: $map-get($cross-map, $cross);
+
+  @if ($cross == center) { // IE overflow fix
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/** Use this mixin to include the flexlay complete library */
+@mixin flexlay() {
+  // General rules
+  @include layout();
+
+  // Breakpoint rules
+  @each $break, $bounds in $break-bounds {
+    $min: map-get($bounds, min);
+    $max: map-get($bounds, max);
+
+    @include bounded($min, $max) { @include layout($break) };
+    @if $max != null { @include bounded($max) { @include layout(gt-#{$break}) }; }
+  }
+
+  // Standalone rules
+  @include flex-fill();
+  @include flex-wrap();
+}
