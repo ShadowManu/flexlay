@@ -24,7 +24,7 @@
 
 /** Use this mixin to provide layout container alignment options */
 @mixin fl-layout-align($main, $cross) {
-  @if($main == null or $cros == null) {
+  @if($main == null or $cross == null) {
     @error 'You must provide both alignment arguments in fl-layout-align';
   }
 
@@ -43,9 +43,9 @@
     stretch: stretch,
   );
 
-  justify-content: $map-get($main-map, $main);
-  align-items: $map-get($cross-map, $cross);
-  align-content: $map-get($cross-map, $cross);
+  justify-content: map-get($main-map, $main);
+  align-items: map-get($cross-map, $cross);
+  align-content: ap-get($cross-map, $cross);
 
   @if ($cross == center) { // IE overflow fix
     max-width: 100%;
