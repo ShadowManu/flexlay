@@ -7,10 +7,12 @@
 
 @import '../variables';
 
+/** Given a specified breakpoint, provide all hide rules that target it */
 @mixin flex-visibility($break: null) {
   @if ($break != null and str-slice($break, 1, 2) != 'gt') {
 
-    // Generate list of all show suffixes that override the hide
+    // Generate list of all 'show' suffixes that override the 'hide'
+    // for the provided $break
     $names: map-keys($break-bounds);
     $index: index($names, $break);
 
@@ -20,25 +22,26 @@
       $show-suffixes: append($show-suffixes, if($i != $index, gt-#{$suffix}, $suffix));
     }
 
-    // Generate show partial selector
-    $show-partial: '';
+    // Transform the $show-suffixes in a negation selector
+    $negation-selector: '';
     @each $show-suffix in $show-suffixes {
       $dashed-suffix: if($show-suffix != '', '-#{$show-suffix}', '');
       $selector: '[#{$lib-prefix}show#{$dashed-suffix}]';
-      $show-partial: '#{$show-partial}:not(#{$selector})';
+      $negation-selector: '#{$negation-selector}:not(#{$selector})';
     }
 
     // Generate list of all hide suffixes that should be generated
+    // for the provided break
     $hide-suffixes: ('');
     @for $i from 1 through $index {
       $suffix: nth($names, $i);
-      $hide-suffixes: append($show-suffixes, if($i != index, gt-#{$suffix}, $suffix))
+      $hide-suffixes: append($hide-suffixes, if($i != $index, gt-#{$suffix}, $suffix));
     }
 
     // Generate rules
     @each $hide-suffix in $hide-suffixes {
       $dashed-suffix: if($hide-suffix != '', '-#{$hide-suffix}', '');
-      [#{$lib-prefix}hide#{$dashed-suffix}]#{$show-partial} { display: none; }
+      [#{$lib-prefix}hide#{$dashed-suffix}]#{$negation-selector} { display: none; }
     }
   }
 }
