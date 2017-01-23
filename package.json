@@ -1,6 +1,6 @@
 {
   "name": "flexlay",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "CSS library for easy use of CSS flexbox, based on Angular Material Layout",
   "main": "null",
   "scripts": {
